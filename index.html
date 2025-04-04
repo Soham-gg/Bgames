@@ -30,11 +30,13 @@
             display: flex;
             gap: 15px;
         }
-        .menu a {
+        .menu a, .feedback-btn {
             color: white;
             text-decoration: none;
             padding: 5px 10px;
             cursor: pointer;
+            background: #0773a6;
+            border-radius: 5px;
         }
         .search {
             padding: 5px 10px;
@@ -43,9 +45,9 @@
         }
         .container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
-            padding: 20px;
+            padding: 10px;
         }
         .game-card {
             background: #05506f;
@@ -58,20 +60,105 @@
             transform: scale(1.05);
         }
         .game-card img {
-            width: 100%;
+            width: 50%;
             border-radius: 10px;
         }
         .game-card p {
-            margin-top: 5px;
+            margin-top: 10px;
             font-size: 14px;
         }
         .hidden {
+            display: none;
+        }
+
+        /* Login Page */
+        .login-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .login-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: black;
+        }
+        .login-box input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-box button {
+            padding: 10px 20px;
+            background: #0773a6;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        /* Feedback Modal */
+        .feedback-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: black;
+            display: none;
+            width: 300px;
+        }
+        .feedback-modal input, .feedback-modal textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .feedback-modal button {
+            padding: 10px;
+            background: #0773a6;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
             display: none;
         }
     </style>
 </head>
 <body>
 
+    <!-- Login Page -->
+    <div class="login-page" id="loginPage">
+        <div class="login-box">
+            <h2>Login</h2>
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Password">
+            <button onclick="login()">Login</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
     <div class="navbar">
         <div class="logo">BGAMES.COM</div>
         <div class="menu">
@@ -80,6 +167,7 @@
             <a onclick="filterGames('adventure')">Adventure</a>
             <a onclick="filterGames('puzzle')">Puzzle</a>
             <a onclick="filterGames('sports')">Sports</a>
+            <a class="feedback-btn" onclick="openFeedback()">Feedback</a>
         </div>
         <input type="text" class="search" id="searchBar" placeholder="Search" onkeyup="searchGames()">
     </div>
@@ -87,130 +175,156 @@
     <div class="container" id="gameContainer">
         <!-- Game Cards -->
         <div class="game-card" data-category="action">
-            <a href="https://www.bgames.com/game/spider-noob-obstacle-course/" Target="_blank">
-            <img src="C:\Users\HP\Pictures\Screenshots\game 1.png" alt="Spider Noob Obstacle Course"> </a>
+            <a href="https://www.bgames.com/game/spider-noob-obstacle-course/" target="_blank">
+            <img src="https://img.gamepix.com/games/spider-noob-obstacle-course/cover/spider-noob-obstacle-course.png?w=400&ar=16:10" alt="Spider Noob Obstacle Course"></a>
             <p>Spider Noob Obstacle Course</p>
         </div>
-        <div class="game-card" data-category="adventure">
+     <div class="game-card" data-category="adventure">
             <a href="https://www.bgames.com/game/bear-vs-humans/" Traget="_blank">
-            <img src="C:\Users\HP\Pictures\Screenshots\game 2.png" alt="Bear Vs Humans"></a>
+            <img src="https://images.crazygames.com/bear-vs-humans_16x9/20250108061946/bear-vs-humans_16x9-cover?auto=format,compress&q=75&cs=strip" alt="Bear Vs Humans"></a>
             <p>Bear Vs Humans</p>
         </div>
         <div class="game-card" data-category="puzzle">
             <a href="https://www.bgames.com/game/stickman-duo-escape-the-tomb/" Traget="_blank">
-            <img src="C:\Users\HP\Pictures\Screenshots\game 3.png" alt="Stickman Duo"></a>
+            <img src="https://assets.bgames.com/7/117897/103924/1200x630/stickman-duo-escape-the-tomb.webp" alt="Stickman Duo"></a>
             <p>Stickman Duo: Escape the Tomb</p>
         </div>
         <div class="game-card" data-category="action">
             <a href="https://www.bgames.com/game/carnage-battle-arena/" Target="_blank">
-            <img src="C:\Users\HP\Pictures\Screenshots\game 4.png" alt="Carnage Battle Arena"></a>
+            <img src="https://images.crazygames.com/carnage-battle-arena_16x9/20241217100707/carnage-battle-arena_16x9-cover?auto=format,compress&q=75&cs=strip" alt="Carnage Battle Arena"></a>
             <p>Carnage Battle Arena</p>
         </div>
         <div class="game-card" data-category="sports">
              <a href="https://www.bgames.com/game/star-exiles/" Target="_blank">
-            <img src="C:\Users\HP\Pictures\Screenshots\game 5.png" alt="Star Exiles"></a>
+            <img src="https://static.keygames.com/4/117894/103921/1200x630/star-exiles.webp" alt="Star Exiles"></a>
             <p>Star Exiles</p>
         </div>
         <div class="game-card" data-category="puzzle">
             <a href="https://www.bgames.com/game/sprunki-3d-escape/" Target="_blank">
-            <img src="C:\Users\HP\Pictures\Screenshots\game 6.png" alt="Sprunki 3D Escape"></a>
+            <img src="https://gosprunki.com/assets/img/sprunki-3d-escape.jpg.jpg" alt="Sprunki 3D Escape"></a>
             <p>Sprunki 3D Escape</p>
         </div>
         <div class="game-card" data-category="adventure">
             <a href="https://www.bgames.com/game/blocks-breaker/" Target="_blank">
-            <img src="C:\Users\HP\Pictures\Screenshots\game 7.png" alt="Blocks Breaker"></a>
+            <img src="https://assets.bgames.com/9/117869/103896/1200x630/blocks-breaker.webp" alt="Blocks Breaker"></a>
             <p>Blocks Breaker</p>
         </div>
         <div class="game-card" data-category="sports">
             <a href="https://www.bgames.com/game/tower-crash-3d/" Target="_blank">
-            <img src="C:\Users\HP\Pictures\Screenshots\game 8.png" alt="Tower Crash 3D"></a>
+            <img src="https://imgs.crazygames.com/tower-crush-3d/20230725072910/tower-crush-3d-cover?metadata=none&quality=40&width=1200&height=630&fit=crop" alt="Tower Crash 3D"></a>
             <p>Tower Crash 3D</p>
         </div>
         <div class="game-card" data-category="action">
             <a href="https://www.bgames.com/game/skating-park/" Target="_blank">
-            <img src="C:\Users\HP\Pictures\Screenshots\game 9.png" alt="Skating Park"></a>
+            <img src="https://assets.bgames.com/3/117893/103920/1200x630/skating-park.webp" alt="Skating Park"></a>
             <p>Skating Park</p>
         </div>
         <div class="game-card" data-category="puzzle">
             <a href="https://www.bgames.com/game/merge-hospital/" Target="_blank">
-            <img src="C:\Users\HP\Pictures\Screenshots\game 10.png" alt="Merge Hospital"></a>
+            <img src="https://assets.bgames.com/0/117940/103967/1200x630/merge-hospital.webp" alt="Merge Hospital"></a>
             <p>Merge Hospital</p>
         </div>
         <div class="game-card" data-category="adventure">
             <a href="https://www.bgames.com/game/mineblock-obby/" Target="_blank">
-            <img src="C:\Users\HP\Pictures\Screenshots\game 11.png" alt="Mineblock Obby"></a>
+            <img src="https://assets.bgames.com/2/117692/103717/1200x630/mineblock-obby.webp" alt="Mineblock Obby"></a>
             <p>Mineblock Obby</p>
         </div>
         <div class="game-card" data-category="sports">
             <a href="https://www.bgames.com/game/sea-battle-admiral/" Target="_blank">
-            <img src="C:\Users\HP\Pictures\Screenshots\game 12.png" alt="Sea Battle Admiral"></a>
+            <img src="https://assets.bgames.com/1/117701/103726/1200x630/sea-battle-admiral.webp" alt="Sea Battle Admiral"></a>
             <p>Sea Battle Admiral</p>
         </div>
         <div class="game-card" data-category="adventure">
             <a href="https://www.bgames.com/game/only-up-balls/" Target="_blank">
-            <img src="C:\Users\HP\Pictures\Screenshots\game 13.png" alt="Only Up: Balls"></a>
+            <img src="https://assets.bgames.com/4/117724/103749/1200x630/only-up-balls.webp" alt="Only Up: Balls"></a>
             <p>Only Up: Balls</p>
         </div>
         <div class="game-card" data-category="action">
             <a href="https://www.bgames.com/game/vex-x3m-2/" Target="_blank">
-            <img src="C:\Users\HP\Pictures\Screenshots\game 14.png" alt="Vex X3M 2"></a>
+            <img src="https://assets.bgames.com/1/117971/103998/1200x630/vex-x3m-2.webp" alt="Vex X3M 2"></a>
             <p>Vex X3M 2</p>
         </div>
         <div class="game-card" data-category="puzzle">
             <a href="https://www.bgames.com/game/funny-walk-fail-run/" Target="_blank">
-            <img src="C:\Users\HP\Pictures\Screenshots\game 15.png" alt="Funny Walk Fail Run"></a>
+            <img src="https://assets.bgames.com/3/117883/103910/1200x630/funny-walk-fail-run.webp" alt="Funny Walk Fail Run"></a>
             <p>Funny Walk Fail Run</p>
         </div>
         <div class="game-card" data-category="action">
            <a href="https://www.bgames.com/game/elevator-fight/" Target="_blank">
-           <img src="C:\Users\HP\Pictures\Screenshots\game 16.png"alt="Elevator Fight"></a>
+           <img src="https://assets.bgames.com/8/117878/103905/1200x630/elevator-fight.webp"alt="Elevator Fight"></a>
            <p>Elevator Fight</p>
         </div>
         <div class="game-card" data-category="puzzel">
            <a href="https://www.bgames.com/game/sprunki-challenge/" Target="_blank">
-           <img src="C:\Users\HP\Pictures\Screenshots\game 17.png"alt="Sprunki Challenge"></a>
+           <img src="https://assets.bgames.com/1/117841/103869/1200x630/sprunki-challenge.webp"alt="Sprunki Challenge"></a>
            <p>Sprunki Challenge</p>
         </div>
         <div class="game-card" data-category="adventure">
            <a href="https://www.bgames.com/game/traffic-jam-3d/" Target="_blank">
-           <img src="C:\Users\HP\Pictures\Screenshots\game 18.png"alt="Traffic Jam 3D"></a>
+           <img src="https://assets.bgames.com/2/116082/102061/1200x630/traffic-jam-3d.webp"alt="Traffic Jam 3D"></a>
            <p>Traffic Jam 3D</p>
         </div>
         <div class="game-card" data-category="sports">
            <a href="https://www.bgames.com/game/agame-stunt-cars/" Target="_blank">
-           <img src="C:\Users\HP\Pictures\Screenshots\game 19.png"alt="Agame Stunt Car"></a>
+           <img src="https://assets.bgames.com/3/116923/102928/1200x630/agame-stunt-cars.webp"alt="Agame Stunt Car"></a>
            <p>Agame Stunt car</p>
         </div>
         <div class="game-card" data-category="action">
            <a href="https://www.bgames.com/game/sniper-3d/" Target="_blank">
-           <img src="C:\Users\HP\Pictures\Screenshots\game 20.png"alt="Sniper 3D"></a>
+           <img src="https://assets.bgames.com/9/116219/102217/1200x630/sniper-3d.webp"alt="Sniper 3D"></a>
            <p>Sniper 3D</p>
         </div>
+
+    <!-- Feedback Form -->
+    <div class="overlay" id="overlay" onclick="closeFeedback()"></div>
+    <div class="feedback-modal" id="feedbackModal">
+        <h2>Feedback</h2>
+        <input type="text" id="feedbackName" placeholder="Your Name">
+        <input type="email" id="feedbackEmail" placeholder="Your Email">
+        <textarea id="feedbackMessage" placeholder="Your Feedback" rows="4"></textarea>
+        <button onclick="submitFeedback()">Submit</button>
+    </div>
+
     <script>
+        function login() {
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            if (username && password) {
+                document.getElementById("loginPage").style.display = "none";
+            } else {
+                alert("Please enter username and password!");
+            }
+        }
+
         function searchGames() {
             let input = document.getElementById("searchBar").value.toLowerCase();
             let cards = document.querySelectorAll(".game-card");
-
             cards.forEach(card => {
-                let title = card.innerText.toLowerCase();
-                if (title.includes(input)) {
-                    card.classList.remove("hidden");
-                } else {
-                    card.classList.add("hidden");
-                }
+                let title = card.querySelector("p").innerText.toLowerCase();
+                card.style.display = title.includes(input) ? "block" : "none";
             });
         }
 
         function filterGames(category) {
             let cards = document.querySelectorAll(".game-card");
-
             cards.forEach(card => {
-                if (category === "all" || card.getAttribute("data-category") === category) {
-                    card.classList.remove("hidden");
-                } else {
-                    card.classList.add("hidden");
-                }
+                card.style.display = category === "all" || card.getAttribute("data-category") === category ? "block" : "none";
             });
+        }
+
+        function openFeedback() {
+            document.getElementById("feedbackModal").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function closeFeedback() {
+            document.getElementById("feedbackModal").style.display = "none";
+            document.getElementById("overlay").style.display = "none";
+        }
+
+        function submitFeedback() {
+            alert("Thank you for your feedback!");
+            closeFeedback();
         }
     </script>
 
