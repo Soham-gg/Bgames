@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BGames Clone</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background: #043046;
+            color: white;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #0a3d5e;
+            padding: 15px 20px;
+        }
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .menu {
+            display: flex;
+            gap: 15px;
+        }
+        .menu a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .search {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            padding: 20px;
+        }
+        .game-card {
+            background: #05506f;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.2s ease-in-out;
+        }
+        .game-card:hover {
+            transform: scale(1.05);
+        }
+        .game-card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .game-card p {
+            margin-top: 5px;
+            font-size: 14px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="logo">BGAMES.COM</div>
+        <div class="menu">
+            <a onclick="filterGames('all')">All</a>
+            <a onclick="filterGames('action')">Action</a>
+            <a onclick="filterGames('adventure')">Adventure</a>
+            <a onclick="filterGames('puzzle')">Puzzle</a>
+            <a onclick="filterGames('sports')">Sports</a>
+        </div>
+        <input type="text" class="search" id="searchBar" placeholder="Search" onkeyup="searchGames()">
+    </div>
+
+    <div class="container" id="gameContainer">
+        <!-- Game Cards -->
+        <div class="game-card" data-category="action">
+            <a href="https://www.bgames.com/game/spider-noob-obstacle-course/" Target="_blank">
+            <img src="C:\Users\HP\Pictures\Screenshots\game 1.png" alt="Spider Noob Obstacle Course"> </a>
+            <p>Spider Noob Obstacle Course</p>
+        </div>
+        <div class="game-card" data-category="adventure">
+            <a href="https://www.bgames.com/game/bear-vs-humans/" Traget="_blank">
+            <img src="C:\Users\HP\Pictures\Screenshots\game 2.png" alt="Bear Vs Humans"></a>
+            <p>Bear Vs Humans</p>
+        </div>
+        <div class="game-card" data-category="puzzle">
+            <a href="https://www.bgames.com/game/stickman-duo-escape-the-tomb/" Traget="_blank">
+            <img src="C:\Users\HP\Pictures\Screenshots\game 3.png" alt="Stickman Duo"></a>
+            <p>Stickman Duo: Escape the Tomb</p>
+        </div>
+        <div class="game-card" data-category="action">
+            <a href="https://www.bgames.com/game/carnage-battle-arena/" Target="_blank">
+            <img src="C:\Users\HP\Pictures\Screenshots\game 4.png" alt="Carnage Battle Arena"></a>
+            <p>Carnage Battle Arena</p>
+        </div>
+        <div class="game-card" data-category="sports">
+             <a href="https://www.bgames.com/game/star-exiles/" Target="_blank">
+            <img src="C:\Users\HP\Pictures\Screenshots\game 5.png" alt="Star Exiles"></a>
+            <p>Star Exiles</p>
+        </div>
+        <div class="game-card" data-category="puzzle">
+            <a href="https://www.bgames.com/game/sprunki-3d-escape/" Target="_blank">
+            <img src="C:\Users\HP\Pictures\Screenshots\game 6.png" alt="Sprunki 3D Escape"></a>
+            <p>Sprunki 3D Escape</p>
+        </div>
+        <div class="game-card" data-category="adventure">
+            <a href="https://www.bgames.com/game/blocks-breaker/" Target="_blank">
+            <img src="C:\Users\HP\Pictures\Screenshots\game 7.png" alt="Blocks Breaker"></a>
+            <p>Blocks Breaker</p>
+        </div>
+        <div class="game-card" data-category="sports">
+            <a href="https://www.bgames.com/game/tower-crash-3d/" Target="_blank">
+            <img src="C:\Users\HP\Pictures\Screenshots\game 8.png" alt="Tower Crash 3D"></a>
+            <p>Tower Crash 3D</p>
+        </div>
+        <div class="game-card" data-category="action">
+            <a href="https://www.bgames.com/game/skating-park/" Target="_blank">
+            <img src="C:\Users\HP\Pictures\Screenshots\game 9.png" alt="Skating Park"></a>
+            <p>Skating Park</p>
+        </div>
+        <div class="game-card" data-category="puzzle">
+            <a href="https://www.bgames.com/game/merge-hospital/" Target="_blank">
+            <img src="C:\Users\HP\Pictures\Screenshots\game 10.png" alt="Merge Hospital"></a>
+            <p>Merge Hospital</p>
+        </div>
+        <div class="game-card" data-category="adventure">
+            <a href="https://www.bgames.com/game/mineblock-obby/" Target="_blank">
+            <img src="C:\Users\HP\Pictures\Screenshots\game 11.png" alt="Mineblock Obby"></a>
+            <p>Mineblock Obby</p>
+        </div>
+        <div class="game-card" data-category="sports">
+            <a href="https://www.bgames.com/game/sea-battle-admiral/" Target="_blank">
+            <img src="C:\Users\HP\Pictures\Screenshots\game 12.png" alt="Sea Battle Admiral"></a>
+            <p>Sea Battle Admiral</p>
+        </div>
+        <div class="game-card" data-category="adventure">
+            <a href="https://www.bgames.com/game/only-up-balls/" Target="_blank">
+            <img src="C:\Users\HP\Pictures\Screenshots\game 13.png" alt="Only Up: Balls"></a>
+            <p>Only Up: Balls</p>
+        </div>
+        <div class="game-card" data-category="action">
+            <a href="https://www.bgames.com/game/vex-x3m-2/" Target="_blank">
+            <img src="C:\Users\HP\Pictures\Screenshots\game 14.png" alt="Vex X3M 2"></a>
+            <p>Vex X3M 2</p>
+        </div>
+        <div class="game-card" data-category="puzzle">
+            <a href="https://www.bgames.com/game/funny-walk-fail-run/" Target="_blank">
+            <img src="C:\Users\HP\Pictures\Screenshots\game 15.png" alt="Funny Walk Fail Run"></a>
+            <p>Funny Walk Fail Run</p>
+        </div>
+        <div class="game-card" data-category="action">
+           <a href="https://www.bgames.com/game/elevator-fight/" Target="_blank">
+           <img src="C:\Users\HP\Pictures\Screenshots\game 16.png"alt="Elevator Fight"></a>
+           <p>Elevator Fight</p>
+        </div>
+        <div class="game-card" data-category="puzzel">
+           <a href="https://www.bgames.com/game/sprunki-challenge/" Target="_blank">
+           <img src="C:\Users\HP\Pictures\Screenshots\game 17.png"alt="Sprunki Challenge"></a>
+           <p>Sprunki Challenge</p>
+        </div>
+        <div class="game-card" data-category="adventure">
+           <a href="https://www.bgames.com/game/traffic-jam-3d/" Target="_blank">
+           <img src="C:\Users\HP\Pictures\Screenshots\game 18.png"alt="Traffic Jam 3D"></a>
+           <p>Traffic Jam 3D</p>
+        </div>
+        <div class="game-card" data-category="sports">
+           <a href="https://www.bgames.com/game/agame-stunt-cars/" Target="_blank">
+           <img src="C:\Users\HP\Pictures\Screenshots\game 19.png"alt="Agame Stunt Car"></a>
+           <p>Agame Stunt car</p>
+        </div>
+        <div class="game-card" data-category="action">
+           <a href="https://www.bgames.com/game/sniper-3d/" Target="_blank">
+           <img src="C:\Users\HP\Pictures\Screenshots\game 20.png"alt="Sniper 3D"></a>
+           <p>Sniper 3D</p>
+        </div>
+    <script>
+        function searchGames() {
+            let input = document.getElementById("searchBar").value.toLowerCase();
+            let cards = document.querySelectorAll(".game-card");
+
+            cards.forEach(card => {
+                let title = card.innerText.toLowerCase();
+                if (title.includes(input)) {
+                    card.classList.remove("hidden");
+                } else {
+                    card.classList.add("hidden");
+                }
+            });
+        }
+
+        function filterGames(category) {
+            let cards = document.querySelectorAll(".game-card");
+
+            cards.forEach(card => {
+                if (category === "all" || card.getAttribute("data-category") === category) {
+                    card.classList.remove("hidden");
+                } else {
+                    card.classList.add("hidden");
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
